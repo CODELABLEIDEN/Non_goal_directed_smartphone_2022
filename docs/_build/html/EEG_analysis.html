@@ -1,0 +1,459 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EEG analysis &#8212; Non attribute movement and EEG 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Utility functions" href="utils.html" />
+    <link rel="prev" title="Attributable and Non attributable movements identification" href="ams_nams.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mat-modindex.html" title="MATLAB Module Index"
+             >matlab index</a> |</li>
+        <li class="right" >
+          <a href="utils.html" title="Utility functions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ams_nams.html" title="Attributable and Non attributable movements identification"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Non attribute movement and EEG 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">EEG analysis</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="eeg-analysis">
+<h1>EEG analysis<a class="headerlink" href="#eeg-analysis" title="Permalink to this headline">¶</a></h1>
+<p>Includes analysis of event related potentials (ERP) and event-related spectral perturbations (ERSP)</p>
+<div class="section" id="erp-analysis">
+<h2>ERP analysis<a class="headerlink" href="#erp-analysis" title="Permalink to this headline">¶</a></h2>
+<p>Pre-processing steps:</p>
+<ol class="arabic simple">
+<li><p>Read EEG struct and include participants that meet the following criteria:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Has EEG data</p></li>
+<li><p>Has been aligned and also selected based on the participant selection</p></li>
+<li><p>Has predictions from the BS to tap model</p></li>
+<li><p>If the participant is a curfew participant include only the first measurement file</p></li>
+<li><p>Attys is false</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>Clean EEG data by running gettechnicallcleanEEG</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Remove blinks according to ICA</p></li>
+<li><p>Interpolate missing channels</p></li>
+<li><p>Re-reference data to the average channel</p></li>
+<li><p>Highpass filter up to 45 Hz</p></li>
+<li><p>Lowpass filter from 0.5 Hz</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p>Run pred_events for attributable and non attributable movements separately (See <a class="reference internal" href="ams_nams.html"><span class="doc">Attributable and Non Attributable Movements identification</span></a> for more info)</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Identify attributable and non attributable movements</p></li>
+<li><p>Epoch data [-2000 2000]</p></li>
+<li><p>Calculate parameters for each trials</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p>Merge EEG structs</p></li>
+<li><p>Remove baseline [-2000 -1500]</p></li>
+<li><p>Threshold trials in range -80 to 80 mV</p></li>
+<li><p>Check if there are sufficient trails left (number of trials &gt; 50)</p></li>
+<li><p>Save:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Participant folder name</p></li>
+<li><p>Trimmedmean ERP removing edge 20% for attributable movements</p></li>
+<li><p>Trimmedmean ERP removing edge 20% for non attributable movements</p></li>
+<li><p>Mean ERP for attributable movements</p></li>
+<li><p>Mean ERP for non attributable movements</p></li>
+<li><p>Number of trials of attributable movements</p></li>
+<li><p>Number of trials of non attributable movements</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="ersp-analysis">
+<h2>ERSP analysis<a class="headerlink" href="#ersp-analysis" title="Permalink to this headline">¶</a></h2>
+<p>Repeat step 1 to 7 of ERP analysis, skipping step 5.</p>
+<ol class="arabic simple" start="8">
+<li><p>Time frequency analysis for all channels with wavelet transform (baseline = [-2000 -1500], cycles = 1 0.3)</p></li>
+<li><p>Save the:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Participant folder  name</p></li>
+<li><p>Power attributable movements</p></li>
+<li><p>Power non attributable movements</p></li>
+<li><p>Number of trials of attributable movements</p></li>
+<li><p>Number of trials of non attributable movements</p></li>
+<li><p>Timesout - array of times used</p></li>
+<li><p>Frequencies - array of frequencies used</p></li>
+<li><p>Channel number</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="directory-structure">
+<h2>Directory structure<a class="headerlink" href="#directory-structure" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+--</span> <span class="n">EEG_analysis</span>
+<span class="o">|</span>   <span class="o">+--</span> <span class="n">ERP_ERSP_data_generation</span> <span class="o">--&gt;</span> <span class="n">Scripts</span> <span class="n">to</span> <span class="n">perform</span> <span class="n">ERP</span> <span class="ow">and</span> <span class="n">ERSP</span> <span class="n">analysis</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">+--</span> <span class="n">generate_erp_data</span><span class="o">.</span><span class="n">m</span> <span class="o">--&gt;</span> <span class="n">performs</span> <span class="n">the</span> <span class="n">ERP</span> <span class="n">analysis</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">+--</span> <span class="n">generate_spectral_data</span><span class="o">.</span><span class="n">m</span> <span class="o">--&gt;</span> <span class="n">performs</span> <span class="n">the</span> <span class="n">ERSP</span> <span class="n">analysis</span>
+<span class="o">|</span>   <span class="o">+--</span> <span class="n">preprocess_EEG</span> <span class="o">--&gt;</span> <span class="n">Scripts</span> <span class="n">to</span> <span class="n">pre</span><span class="o">-</span><span class="n">process</span> <span class="n">the</span> <span class="n">EEG</span> <span class="n">data</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">+--</span> <span class="n">gettechnicallycleanEEG</span><span class="o">.</span><span class="n">m</span> <span class="o">--&gt;</span> <span class="n">performs</span> <span class="n">the</span> <span class="n">preprocessing</span> <span class="n">of</span> <span class="n">the</span> <span class="n">EEG</span> <span class="n">data</span>\
+<span class="o">|</span>   <span class="o">+--</span> <span class="n">t_tests_ERP_and_ERSP</span> <span class="o">--&gt;</span> <span class="n">Scripts</span> <span class="n">to</span> <span class="n">perform</span> <span class="n">ERP</span> <span class="ow">and</span> <span class="n">ERSP</span> <span class="n">analysis</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">+--</span> <span class="n">rename_add_suffix</span><span class="o">.</span><span class="n">m</span> <span class="o">--&gt;</span> <span class="n">renames</span> <span class="n">the</span> <span class="n">saved</span> <span class="n">LIMO</span> <span class="n">files</span> <span class="ow">not</span> <span class="n">to</span> <span class="n">be</span> <span class="n">overwritten</span> <span class="n">through</span> <span class="n">multiple</span> <span class="n">analysis</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">+--</span> <span class="n">run_clustering</span><span class="o">.</span><span class="n">m</span> <span class="o">--&gt;</span> <span class="n">Calls</span> <span class="n">LIMO</span> <span class="n">functions</span> <span class="n">to</span> <span class="n">perform</span> <span class="n">multiple</span> <span class="n">comparison</span> <span class="n">correction</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">+--</span> <span class="n">run_t_tests_and_clustering</span><span class="o">.</span><span class="n">m</span> <span class="o">--&gt;</span> <span class="n">calls</span> <span class="n">functions</span> <span class="k">for</span> <span class="n">t</span> <span class="n">test</span> <span class="ow">and</span> <span class="n">calls</span> <span class="n">run_clustering</span><span class="o">.</span><span class="n">m</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="code">
+<h2>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-EEG_analysis.ERP_ERSP_data_generation">
+<span id="pre-processing"></span><h3>Pre-Processing<a class="headerlink" href="#module-EEG_analysis.ERP_ERSP_data_generation" title="Permalink to this headline">¶</a></h3>
+<dl class="mat function">
+<dt id="EEG_analysis.ERP_ERSP_data_generation.generate_erp_data">
+<code class="sig-prename descclassname"><span class="pre">EEG_analysis.ERP_ERSP_data_generation.</span></code><code class="sig-name descname"><span class="pre">generate_erp_data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">EEG_integrals_am</span></em>, <em class="sig-param"><span class="pre">EEG_integrals_nam</span></em>, <em class="sig-param"><span class="pre">participant</span></em>, <em class="sig-param"><span class="pre">indx</span></em>, <em class="sig-param"><span class="pre">erp_data</span></em>, <em class="sig-param"><span class="pre">options</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EEG_analysis.ERP_ERSP_data_generation.generate_erp_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates ERP per participant</p>
+<p><strong>Usage:</strong> [all_data] = generate_erp_data(EEG1_i, EEG1_d,participant, indx, all_data)</p>
+<dl class="simple">
+<dt>Input(s):</dt><dd><ul class="simple">
+<li><p>EEG1_i = EEG struct with epoched integral data</p></li>
+<li><p>EEG1_d = EEG struct with epoched deltas data</p></li>
+<li><p>participant = participant</p></li>
+<li><p>indx = index to place the participant data in cell</p></li>
+<li><p>erp_data = cell with the epoched EEG data of other participants</p></li>
+</ul>
+</dd>
+<dt>Output(s):</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>erp_data = cell placeholder cell with the epoched predictions of one participant</dt><dd><ul>
+<li><p>erp_data{indx,1} = participant name</p></li>
+<li><p>erp_data{indx,2} = trimmed ERP for attributable movements (AM)</p></li>
+<li><p>erp_data{indx,3} = trimmed ERP for non attributable movements (NAM)</p></li>
+<li><p>erp_data{indx,4} = (mean) ERP for attributable movements (AM)</p></li>
+<li><p>erp_data{indx,5} = (mean) ERP for non attributable movements (NAM)</p></li>
+<li><p>erp_data{indx,6} = number of trials for attributable movements (AM)</p></li>
+<li><p>erp_data{indx,7} = number of trials for non attributable movements (NAM)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<p>Author: R.M.D. Kock, Leiden University</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt id="EEG_analysis.ERP_ERSP_data_generation.generate_spectral_data">
+<code class="sig-prename descclassname"><span class="pre">EEG_analysis.ERP_ERSP_data_generation.</span></code><code class="sig-name descname"><span class="pre">generate_spectral_data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">EEG_integrals_am</span></em>, <em class="sig-param"><span class="pre">EEG_integrals_nam</span></em>, <em class="sig-param"><span class="pre">participant</span></em>, <em class="sig-param"><span class="pre">indx</span></em>, <em class="sig-param"><span class="pre">all_data</span></em>, <em class="sig-param"><span class="pre">options</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EEG_analysis.ERP_ERSP_data_generation.generate_spectral_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a placeholder cell with the datasets of all participants for plotting of results</p>
+<p><strong>Usage:</strong> [all_data,indx] = generate_spectral_data(EEG_integrals_am,EEG_integrals_nam, participant, indx, all_data, options)</p>
+<dl class="simple">
+<dt>Input(s):</dt><dd><ul class="simple">
+<li><p>EEG_integrals_am = EEG struct with epoched integral attributable movement data</p></li>
+<li><p>EEG_integrals_nam = EEG struct with epoched integral non attributable movement data</p></li>
+<li><p>participant = participant</p></li>
+<li><p>indx = index to place the participant data in cell</p></li>
+<li><p>all_data = cell placeholder cell with the data of the participants</p></li>
+<li><p>options =</p></li>
+</ul>
+</dd>
+<dt>Output(s):</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>all_data = cell placeholder cell with the data of one participant</dt><dd><p>all_data{indx_spec,1} = participant name
+all_data{indx_spec,2} = power attributable movements (freq x time) (AM);
+all_data{indx_spec,3} = power non attributable movements (freq x time) ;
+all_data{indx_spec,4} = number of trials for attributable movements (AM);
+all_data{indx_spec,5} = number of trials for non attributable movements (NAM);
+all_data{indx_spec,6} = sequence of timesteps indication the original timepoints;
+all_data{indx_spec,7} = sequence of frequencies used in analysis;
+all_data{indx_spec,8} = electrode number;</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt id="EEG_analysis.ERP_ERSP_data_generation.load_EEG_checkpoints">
+<code class="sig-prename descclassname"><span class="pre">EEG_analysis.ERP_ERSP_data_generation.</span></code><code class="sig-name descname"><span class="pre">load_EEG_checkpoints</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">path</span></em>, <em class="sig-param"><span class="pre">load_str</span></em>, <em class="sig-param"><span class="pre">data_name</span></em>, <em class="sig-param"><span class="pre">options</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EEG_analysis.ERP_ERSP_data_generation.load_EEG_checkpoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>load erp and or ersp checkpoints</p>
+<dl>
+<dt><strong>Usage:</strong></dt><dd><blockquote>
+<div><ul class="simple">
+<li><p>[erp_all_data, ersp_all_data] = load_EEG_checkpoints(path, load_str, data_name,)</p></li>
+<li><p>[erp_all_data, ersp_all_data] = load_EEG_checkpoints(…, ‘save_results’, 0)</p></li>
+<li><p>[erp_all_data, ersp_all_data] = load_EEG_checkpoints(…, ‘save_path’, path)</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>Input(s):</dt><dd><ul class="simple">
+<li><p>path = path to checkpoint files with erp and ersp data</p></li>
+<li><p>load_str = unique string in checkpoint name</p></li>
+<li><p>options.save_results <strong>optional</strong> logical = 1 – 0 not to save the results</p></li>
+<li><p>options.save_path <strong>optional</strong> char = path – save path</p></li>
+</ul>
+</dd>
+<dt>Output(s):</dt><dd><ul class="simple">
+<li><p>loaded_data = erp data from all checkpoints</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Author: R.M.D. Kock, Leiden University</p>
+</dd></dl>
+
+</div>
+<div class="section" id="id1">
+<h3>ERP analysis<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="module-EEG_analysis.preprocess_EEG"></span><dl class="mat function">
+<dt id="EEG_analysis.preprocess_EEG.gettechnincallycleanEEG">
+<code class="sig-prename descclassname"><span class="pre">EEG_analysis.preprocess_EEG.</span></code><code class="sig-name descname"><span class="pre">gettechnincallycleanEEG</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">INEEG</span></em>, <em class="sig-param"><span class="pre">bandpass_upper_range</span></em>, <em class="sig-param"><span class="pre">bandpass_lower_range</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EEG_analysis.preprocess_EEG.gettechnincallycleanEEG" title="Permalink to this definition">¶</a></dt>
+<dd><p>OUTEEG = gettechnincallycleanEEG(INEEG,bandpass_upper_range)</p>
+<dl class="simple">
+<dt>Input(s):</dt><dd><ul class="simple">
+<li><p>INEEG: EEG struct to process</p></li>
+<li><p>bandpass_upper_range: Upper range for bandpass filtering of EEG data</p></li>
+</ul>
+</dd>
+</dl>
+<p>Assume 1.ICA performed, 2. Bad channels have been marked, 3. channel locations already placed 4. Electrode locations present 
+Performs the following steps</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Remove blinks according to ICA</p></li>
+<li><p>Interpolate missing channels</p></li>
+<li><p>Re-reference data to average channel</p></li>
+</ol>
+</div></blockquote>
+<p>pop_jointprob( EEG, 1, [1:62],5, 5, [0], 1, 0);
+Remove non_EEG data</p>
+<p>Arko Ghosh, Leiden University
+Added at line 43 – [INEEG] = pop_eegfiltnew(INEEG, 0.5, []);</p>
+</dd></dl>
+
+</div>
+<div class="section" id="id2">
+<h3>ERSP analysis<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="module-EEG_analysis.t_tests_ERP_and_ERSP"></span><dl class="mat function">
+<dt id="EEG_analysis.t_tests_ERP_and_ERSP.main_t_tests">
+<code class="sig-prename descclassname"><span class="pre">EEG_analysis.t_tests_ERP_and_ERSP.</span></code><code class="sig-name descname"><span class="pre">main_t_tests</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">path</span></em>, <em class="sig-param"><span class="pre">options</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EEG_analysis.t_tests_ERP_and_ERSP.main_t_tests" title="Permalink to this definition">¶</a></dt>
+<dd><p>LIMO t_tests for ERP and ERSP data for AMs, NAMs, and paired t_tests</p>
+<dl>
+<dt><strong>Usage:</strong> </dt><dd><blockquote>
+<div><ul class="simple">
+<li><p>main_t_tests(path)</p></li>
+<li><p>main_t_tests(…, ‘trials’, [50, 100])</p></li>
+<li><p>main_t_tests(…, ‘erp_all_data’, erp_all_data, ‘ersp_all_data’, ersp_all_data)</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>Input(s):</dt><dd><ul class="simple">
+<li><p>path = path to checkpoint files with erp and ersp data</p></li>
+<li><p>options.trials <strong>optional</strong> double = [50] array with the minimum number of trials (example: [50, 100])</p></li>
+<li><p>options.erp_all_data = erp data generated with generate_erp_data (see required structure)</p></li>
+<li><p>options.ersp_all_data = erp data generated with generate_spectral_data (see required structure)</p></li>
+</ul>
+</dd>
+<dt>Output(s):</dt><dd><ul class="simple">
+<li><p>saves all the results from LIMO t_tests for each test in folders</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>Requires:</dt><dd><ul class="simple">
+<li><p>preprocess_erp_data.m</p></li>
+<li><p>preprocess_ersp_data.m</p></li>
+<li><p>run_t_tests_and_clustering.m</p></li>
+</ul>
+</dd>
+</dl>
+<p>Author: R.M.D. Kock, Leiden University</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt id="EEG_analysis.t_tests_ERP_and_ERSP.rename_add_suffix">
+<code class="sig-prename descclassname"><span class="pre">EEG_analysis.t_tests_ERP_and_ERSP.</span></code><code class="sig-name descname"><span class="pre">rename_add_suffix</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">path</span></em>, <em class="sig-param"><span class="pre">suffix</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EEG_analysis.t_tests_ERP_and_ERSP.rename_add_suffix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rename LIMO saved files by adding suffix</p>
+<p><strong>Usage:</strong> rename_add_suffix(path, action, suffix)</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Input(s):</dt><dd><ul class="simple">
+<li><p>path = path to saved LIMO file</p></li>
+<li><p>suffix = suffix to add behind file name</p></li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<p>Author: R.M.D. Kock, Leiden University</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt id="EEG_analysis.t_tests_ERP_and_ERSP.run_clustering">
+<code class="sig-prename descclassname"><span class="pre">EEG_analysis.t_tests_ERP_and_ERSP.</span></code><code class="sig-name descname"><span class="pre">run_clustering</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">LIMO_paths</span></em>, <em class="sig-param"><span class="pre">significance_threshold</span></em>, <em class="sig-param"><span class="pre">channeighbstructmat</span></em>, <em class="sig-param"><span class="pre">tf</span></em>, <em class="sig-param"><span class="pre">paired</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EEG_analysis.t_tests_ERP_and_ERSP.run_clustering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepare data and calls LIMO cluster correction</p>
+<p><strong>Usage:</strong> [mask, cluster_p] = run_clustering(LIMO_paths, significance_threshold, channeighbstructmat, tf, paired)</p>
+<dl class="simple">
+<dt>Input(s):</dt><dd><ul class="simple">
+<li><p>LIMO_paths = path where data is saved</p></li>
+<li><p>significance_threshold = significance threshold for the clustering</p></li>
+<li><p>channeighbstructmat (name value argument default will load the file if present on path) = struct with information on what electrodes are neighbors with each other</p></li>
+<li><p>tf (logical) = 1 if time frequency analysis and 0 if erp analysis</p></li>
+<li><p>paired (logical) = 1 if paired ttest is used and 0 if one sample ttest</p></li>
+</ul>
+</dd>
+<dt>Output(s):</dt><dd><ul class="simple">
+<li><p>maks = a binary matrix of significant/non-significant cells</p></li>
+<li><p>cluster_p = a matrix of cluster corrected p-values</p></li>
+</ul>
+</dd>
+<dt>Requires:</dt><dd><ul class="simple">
+<li><p>limo_ft_cluster_test.m</p></li>
+<li><p>limo_ft_cluster_correction.m</p></li>
+</ul>
+</dd>
+</dl>
+<p>Author: R.M.D. Kock, Leiden University</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt id="EEG_analysis.t_tests_ERP_and_ERSP.run_t_tests_and_clustering">
+<code class="sig-prename descclassname"><span class="pre">EEG_analysis.t_tests_ERP_and_ERSP.</span></code><code class="sig-name descname"><span class="pre">run_t_tests_and_clustering</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">unique_name</span></em>, <em class="sig-param"><span class="pre">paired</span></em>, <em class="sig-param"><span class="pre">tf</span></em>, <em class="sig-param"><span class="pre">data1</span></em>, <em class="sig-param"><span class="pre">data2</span></em>, <em class="sig-param"><span class="pre">options</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EEG_analysis.t_tests_ERP_and_ERSP.run_t_tests_and_clustering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a placeholder cell with the datasets of all participants for plotting of results</p>
+<p><strong>Usage:</strong> [erp_data, ams, nams] = preprocess_erp_data(erp_data, paired, min_num_trials)</p>
+<dl class="simple">
+<dt>Input(s):</dt><dd><ul class="simple">
+<li><p>unique_name = folder name to save the data and also added as a suffix to the file names</p></li>
+<li><p>paired (logical) = 1 if paired ttest is used and 0 if one sample ttest</p></li>
+<li><p>tf (logical) = 1 if time frequency analysis and 0 if erp analysis</p></li>
+<li><p>data1 = data for t test</p></li>
+<li><p>data2 (optional only required if paired is 1) = data for paired samples t test</p></li>
+<li><p>significance_threshold (name value argument default : 0.05) = threshold for bootstrap significance testing</p></li>
+<li><p>bootstrap (name value argument default : 1000) = number of bootstraps to perform</p></li>
+<li><p>channeighbstructmat (name value argument default will load the file if present on path) = struct with information on what electrodes are neighbors with each other</p></li>
+<li><p>expected_chanlocs (name value argument default will load the file if present on path) = struct expected channel locations</p></li>
+</ul>
+</dd>
+<dt>Output(s):</dt><dd><ul class="simple">
+<li><p>LIMO_path = path where data is saved</p></li>
+</ul>
+</dd>
+</dl>
+<p>Author: R.M.D. Kock, Leiden University</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">EEG analysis</a><ul>
+<li><a class="reference internal" href="#erp-analysis">ERP analysis</a></li>
+<li><a class="reference internal" href="#ersp-analysis">ERSP analysis</a></li>
+<li><a class="reference internal" href="#directory-structure">Directory structure</a></li>
+<li><a class="reference internal" href="#code">Code</a><ul>
+<li><a class="reference internal" href="#module-EEG_analysis.ERP_ERSP_data_generation">Pre-Processing</a></li>
+<li><a class="reference internal" href="#id1">ERP analysis</a></li>
+<li><a class="reference internal" href="#id2">ERSP analysis</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ams_nams.html"
+                        title="previous chapter">Attributable and Non attributable movements identification</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="utils.html"
+                        title="next chapter">Utility functions</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/EEG_analysis.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="mat-modindex.html" title="MATLAB Module Index"
+             >matlab index</a> |</li>
+        <li class="right" >
+          <a href="utils.html" title="Utility functions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ams_nams.html" title="Attributable and Non attributable movements identification"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Non attribute movement and EEG 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">EEG analysis</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright .
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
+    </div>
+  </body>
+</html>
