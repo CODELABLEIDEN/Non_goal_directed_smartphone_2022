@@ -42,10 +42,10 @@ Pre-processing steps:
 
  - Participant folder name
  - Trimmedmean ERP removing edge 20% for attributable movements
- - Mean ERP for attributable movements
- - Number of trials of attributable movements
  - Trimmedmean ERP removing edge 20% for non attributable movements
+ - Mean ERP for attributable movements
  - Mean ERP for non attributable movements
+ - Number of trials of attributable movements
  - Number of trials of non attributable movements
 
 ERSP analysis
@@ -68,18 +68,19 @@ Repeat step 1 to 7 of ERP analysis, skipping step 5.
 
 Directory structure
 -------------------
-**TODO** update
-
 
 ::
 
    +-- EEG_analysis
-   |   +-- channeighbstructmat.mat -->
-   |   +-- expected_chanlocs.mat -->
-   |   +-- ERP --> Scripts to perform ERP analysis
+   |   +-- ERP_ERSP_data_generation --> Scripts to perform ERP and ERSP analysis
+   |   |   +-- generate_erp_data.m --> performs the ERP analysis
+   |   |   +-- generate_spectral_data.m --> performs the ERSP analysis
    |   +-- preprocess_EEG --> Scripts to pre-process the EEG data
-   |   |   +-- getdataorganised.m --> Saves the data as eeglab struct
-   |   |   +-- gettechnicallycleanEEG.m --> performs the preprocessing of the EEG data
+   |   |   +-- gettechnicallycleanEEG.m --> performs the preprocessing of the EEG data\
+   |   +-- t_tests_ERP_and_ERSP --> Scripts to perform ERP and ERSP analysis
+   |   |   +-- rename_add_suffix.m --> renames the saved LIMO files not to be overwritten through multiple analysis
+   |   |   +-- run_clustering.m --> Calls LIMO functions to perform multiple comparison correction
+   |   |   +-- run_t_tests_and_clustering.m --> calls functions for t test and calls run_clustering.m
 
 Code
 ----
@@ -87,24 +88,18 @@ Code
 Pre-Processing
 ^^^^^^^^^^^^^^
 
-.. mat:automodule:: EEG_analysis.preprocess_EEG
+.. mat:automodule:: EEG_analysis.ERP_ERSP_data_generation
    :members:
 
 
 ERP analysis
 ^^^^^^^^^^^^
 
-.. mat:automodule:: EEG_analysis.ERP
+.. mat:automodule:: EEG_analysis.preprocess_EEG
    :members:
 
 ERSP analysis
 ^^^^^^^^^^^^^
 
-.. mat:automodule:: EEG_analysis.time_freq_analysis
-   :members:
-
-Result plotting
-^^^^^^^^^^^^^^^
-
-.. mat:automodule:: EEG_analysis.result_plotting
+.. mat:automodule:: EEG_analysis.t_tests_ERP_and_ERSP
    :members:

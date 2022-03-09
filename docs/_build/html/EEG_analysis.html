@@ -6,10 +6,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EEG analysis &#8212; Non attribute movement and EEG 0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -95,10 +95,10 @@
 <div><ul class="simple">
 <li><p>Participant folder name</p></li>
 <li><p>Trimmedmean ERP removing edge 20% for attributable movements</p></li>
-<li><p>Mean ERP for attributable movements</p></li>
-<li><p>Number of trials of attributable movements</p></li>
 <li><p>Trimmedmean ERP removing edge 20% for non attributable movements</p></li>
+<li><p>Mean ERP for attributable movements</p></li>
 <li><p>Mean ERP for non attributable movements</p></li>
+<li><p>Number of trials of attributable movements</p></li>
 <li><p>Number of trials of non attributable movements</p></li>
 </ul>
 </div></blockquote>
@@ -125,75 +125,136 @@
 </div>
 <div class="section" id="directory-structure">
 <h2>Directory structure<a class="headerlink" href="#directory-structure" title="Permalink to this headline">¶</a></h2>
-<p><strong>TODO</strong> update</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+--</span> <span class="n">EEG_analysis</span>
-<span class="o">|</span>   <span class="o">+--</span> <span class="n">channeighbstructmat</span><span class="o">.</span><span class="n">mat</span> <span class="o">--&gt;</span>
-<span class="o">|</span>   <span class="o">+--</span> <span class="n">expected_chanlocs</span><span class="o">.</span><span class="n">mat</span> <span class="o">--&gt;</span>
-<span class="o">|</span>   <span class="o">+--</span> <span class="n">ERP</span> <span class="o">--&gt;</span> <span class="n">Scripts</span> <span class="n">to</span> <span class="n">perform</span> <span class="n">ERP</span> <span class="n">analysis</span>
+<span class="o">|</span>   <span class="o">+--</span> <span class="n">ERP_ERSP_data_generation</span> <span class="o">--&gt;</span> <span class="n">Scripts</span> <span class="n">to</span> <span class="n">perform</span> <span class="n">ERP</span> <span class="ow">and</span> <span class="n">ERSP</span> <span class="n">analysis</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">+--</span> <span class="n">generate_erp_data</span><span class="o">.</span><span class="n">m</span> <span class="o">--&gt;</span> <span class="n">performs</span> <span class="n">the</span> <span class="n">ERP</span> <span class="n">analysis</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">+--</span> <span class="n">generate_spectral_data</span><span class="o">.</span><span class="n">m</span> <span class="o">--&gt;</span> <span class="n">performs</span> <span class="n">the</span> <span class="n">ERSP</span> <span class="n">analysis</span>
 <span class="o">|</span>   <span class="o">+--</span> <span class="n">preprocess_EEG</span> <span class="o">--&gt;</span> <span class="n">Scripts</span> <span class="n">to</span> <span class="n">pre</span><span class="o">-</span><span class="n">process</span> <span class="n">the</span> <span class="n">EEG</span> <span class="n">data</span>
-<span class="o">|</span>   <span class="o">|</span>   <span class="o">+--</span> <span class="n">getdataorganised</span><span class="o">.</span><span class="n">m</span> <span class="o">--&gt;</span> <span class="n">Saves</span> <span class="n">the</span> <span class="n">data</span> <span class="k">as</span> <span class="n">eeglab</span> <span class="n">struct</span>
-<span class="o">|</span>   <span class="o">|</span>   <span class="o">+--</span> <span class="n">gettechnicallycleanEEG</span><span class="o">.</span><span class="n">m</span> <span class="o">--&gt;</span> <span class="n">performs</span> <span class="n">the</span> <span class="n">preprocessing</span> <span class="n">of</span> <span class="n">the</span> <span class="n">EEG</span> <span class="n">data</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">+--</span> <span class="n">gettechnicallycleanEEG</span><span class="o">.</span><span class="n">m</span> <span class="o">--&gt;</span> <span class="n">performs</span> <span class="n">the</span> <span class="n">preprocessing</span> <span class="n">of</span> <span class="n">the</span> <span class="n">EEG</span> <span class="n">data</span>\
+<span class="o">|</span>   <span class="o">+--</span> <span class="n">t_tests_ERP_and_ERSP</span> <span class="o">--&gt;</span> <span class="n">Scripts</span> <span class="n">to</span> <span class="n">perform</span> <span class="n">ERP</span> <span class="ow">and</span> <span class="n">ERSP</span> <span class="n">analysis</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">+--</span> <span class="n">rename_add_suffix</span><span class="o">.</span><span class="n">m</span> <span class="o">--&gt;</span> <span class="n">renames</span> <span class="n">the</span> <span class="n">saved</span> <span class="n">LIMO</span> <span class="n">files</span> <span class="ow">not</span> <span class="n">to</span> <span class="n">be</span> <span class="n">overwritten</span> <span class="n">through</span> <span class="n">multiple</span> <span class="n">analysis</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">+--</span> <span class="n">run_clustering</span><span class="o">.</span><span class="n">m</span> <span class="o">--&gt;</span> <span class="n">Calls</span> <span class="n">LIMO</span> <span class="n">functions</span> <span class="n">to</span> <span class="n">perform</span> <span class="n">multiple</span> <span class="n">comparison</span> <span class="n">correction</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">+--</span> <span class="n">run_t_tests_and_clustering</span><span class="o">.</span><span class="n">m</span> <span class="o">--&gt;</span> <span class="n">calls</span> <span class="n">functions</span> <span class="k">for</span> <span class="n">t</span> <span class="n">test</span> <span class="ow">and</span> <span class="n">calls</span> <span class="n">run_clustering</span><span class="o">.</span><span class="n">m</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="code">
 <h2>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="module-EEG_analysis.preprocess_EEG">
-<span id="pre-processing"></span><h3>Pre-Processing<a class="headerlink" href="#module-EEG_analysis.preprocess_EEG" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="module-EEG_analysis.ERP_ERSP_data_generation">
+<span id="pre-processing"></span><h3>Pre-Processing<a class="headerlink" href="#module-EEG_analysis.ERP_ERSP_data_generation" title="Permalink to this headline">¶</a></h3>
 <dl class="mat function">
-<dt class="sig sig-object mat" id="EEG_analysis.preprocess_EEG.getdataorganised">
-<span class="sig-prename descclassname"><span class="pre">EEG_analysis.preprocess_EEG.</span></span><span class="sig-name descname"><span class="pre">getdataorganised</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">sub</span></em>, <em class="sig-param"><span class="pre">inputpath</span></em>, <em class="sig-param"><span class="pre">outputpath</span></em>, <em class="sig-param"><span class="pre">phonepath</span></em>, <em class="sig-param"><span class="pre">overwrite</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EEG_analysis.preprocess_EEG.getdataorganised" title="Permalink to this definition">¶</a></dt>
-<dd><p>Usage getdataorganised(sub,inputpath,outputpath,overwrite)</p>
-<p>Organizes the data for a given subject with the following outputs, 
-Applicable to all data collected through 2018 - 2020 at CODELAB</p>
+<dt id="EEG_analysis.ERP_ERSP_data_generation.generate_erp_data">
+<code class="sig-prename descclassname"><span class="pre">EEG_analysis.ERP_ERSP_data_generation.</span></code><code class="sig-name descname"><span class="pre">generate_erp_data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">EEG_integrals_am</span></em>, <em class="sig-param"><span class="pre">EEG_integrals_nam</span></em>, <em class="sig-param"><span class="pre">participant</span></em>, <em class="sig-param"><span class="pre">indx</span></em>, <em class="sig-param"><span class="pre">erp_data</span></em>, <em class="sig-param"><span class="pre">options</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EEG_analysis.ERP_ERSP_data_generation.generate_erp_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates ERP per participant</p>
+<p><strong>Usage:</strong> [all_data] = generate_erp_data(EEG1_i, EEG1_d,participant, indx, all_data)</p>
 <dl class="simple">
-<dt>INPUT(s)</dt><dd><ul class="simple">
-<li><p>sub : subject name as in ‘AG01’</p></li>
-<li><p>inputpath: folder where the subject data is stored</p></li>
-<li><p>Phone path: folder where processed phone data is stored</p></li>
-<li><p>Overwrite: If set true then overweite pre-existing data(default true)</p></li>
+<dt>Input(s):</dt><dd><ul class="simple">
+<li><p>EEG1_i = EEG struct with epoched integral data</p></li>
+<li><p>EEG1_d = EEG struct with epoched deltas data</p></li>
+<li><p>participant = participant</p></li>
+<li><p>indx = index to place the participant data in cell</p></li>
+<li><p>erp_data = cell with the epoched EEG data of other participants</p></li>
+</ul>
+</dd>
+<dt>Output(s):</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>erp_data = cell placeholder cell with the epoched predictions of one participant</dt><dd><ul>
+<li><p>erp_data{indx,1} = participant name</p></li>
+<li><p>erp_data{indx,2} = trimmed ERP for attributable movements (AM)</p></li>
+<li><p>erp_data{indx,3} = trimmed ERP for non attributable movements (NAM)</p></li>
+<li><p>erp_data{indx,4} = (mean) ERP for attributable movements (AM)</p></li>
+<li><p>erp_data{indx,5} = (mean) ERP for non attributable movements (NAM)</p></li>
+<li><p>erp_data{indx,6} = number of trials for attributable movements (AM)</p></li>
+<li><p>erp_data{indx,7} = number of trials for non attributable movements (NAM)</p></li>
 </ul>
 </dd>
 </dl>
-<p>OUTPUT 
-For each subject coded in traditonal form like AG01 creates a new EEG
-folder with EEG.set for each session
-Attys or NIH daq data is added into the .set file 
-Phone data is added as well 
-Contains a companion summary file containing the following information per file
-Subject level ##Curfew##Age(at first EEG session)##Gender##FilterSettings
-Session level ##Pre-Curfew##Post-Curfew
-##{Triggers,Num of Triggers}##ICA status##ONSET UTC##OFFSET UTC##NIH DAQ
-Status##Attys Status##Experiment Type: RT, Passive Tactile, Phone, Active
-Tactile, Audio, Box with FS, Indoor vs. Outdoor</p>
-<dl class="simple">
-<dt>Performs the following EEG steps </dt><dd><ol class="arabic simple">
-<li><p>Removes bad channels based on poor impedence</p></li>
-<li><p>Filter (0.1 to 70 Hz)</p></li>
-<li><p>RunICA</p></li>
-<li><p>NOT DONE. wICA to remove ICA, Blinkremoval based on ICA OR
-interpolation of missing channels and then average referencing</p></li>
-</ol>
-</dd>
-<dt>Performs the following Phone steps</dt><dd><ol class="arabic simple">
-<li><p>Trim phone data to the session overlap only</p></li>
-</ol>
+</li>
+</ul>
 </dd>
 </dl>
-<p>Arko Ghosh, Leiden University, 27th June 2020% 
-Requires xlxs file paths to be manually set(stored in the paper specific one-drive-folder):</p>
-<blockquote>
-<div><p>DataDetailList_MvdR
-MASS_Subject_list</p>
-</div></blockquote>
+<p>Author: R.M.D. Kock, Leiden University</p>
 </dd></dl>
 
 <dl class="mat function">
-<dt class="sig sig-object mat" id="EEG_analysis.preprocess_EEG.gettechnincallycleanEEG">
-<span class="sig-prename descclassname"><span class="pre">EEG_analysis.preprocess_EEG.</span></span><span class="sig-name descname"><span class="pre">gettechnincallycleanEEG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">INEEG</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EEG_analysis.preprocess_EEG.gettechnincallycleanEEG" title="Permalink to this definition">¶</a></dt>
-<dd><p>OUTEEG = gettechnincallycleanEEG(INEEG)</p>
-<p>assume 1.ICA performed, 2. Bad channels have been marked, 3. channel locations already placed 4. Electrode locations present 
-Perfrorms the following step</p>
+<dt id="EEG_analysis.ERP_ERSP_data_generation.generate_spectral_data">
+<code class="sig-prename descclassname"><span class="pre">EEG_analysis.ERP_ERSP_data_generation.</span></code><code class="sig-name descname"><span class="pre">generate_spectral_data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">EEG_integrals_am</span></em>, <em class="sig-param"><span class="pre">EEG_integrals_nam</span></em>, <em class="sig-param"><span class="pre">participant</span></em>, <em class="sig-param"><span class="pre">indx</span></em>, <em class="sig-param"><span class="pre">all_data</span></em>, <em class="sig-param"><span class="pre">options</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EEG_analysis.ERP_ERSP_data_generation.generate_spectral_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a placeholder cell with the datasets of all participants for plotting of results</p>
+<p><strong>Usage:</strong> [all_data,indx] = generate_spectral_data(EEG_integrals_am,EEG_integrals_nam, participant, indx, all_data, options)</p>
+<dl class="simple">
+<dt>Input(s):</dt><dd><ul class="simple">
+<li><p>EEG_integrals_am = EEG struct with epoched integral attributable movement data</p></li>
+<li><p>EEG_integrals_nam = EEG struct with epoched integral non attributable movement data</p></li>
+<li><p>participant = participant</p></li>
+<li><p>indx = index to place the participant data in cell</p></li>
+<li><p>all_data = cell placeholder cell with the data of the participants</p></li>
+<li><p>options =</p></li>
+</ul>
+</dd>
+<dt>Output(s):</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>all_data = cell placeholder cell with the data of one participant</dt><dd><p>all_data{indx_spec,1} = participant name
+all_data{indx_spec,2} = power attributable movements (freq x time) (AM);
+all_data{indx_spec,3} = power non attributable movements (freq x time) ;
+all_data{indx_spec,4} = number of trials for attributable movements (AM);
+all_data{indx_spec,5} = number of trials for non attributable movements (NAM);
+all_data{indx_spec,6} = sequence of timesteps indication the original timepoints;
+all_data{indx_spec,7} = sequence of frequencies used in analysis;
+all_data{indx_spec,8} = electrode number;</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt id="EEG_analysis.ERP_ERSP_data_generation.load_EEG_checkpoints">
+<code class="sig-prename descclassname"><span class="pre">EEG_analysis.ERP_ERSP_data_generation.</span></code><code class="sig-name descname"><span class="pre">load_EEG_checkpoints</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">path</span></em>, <em class="sig-param"><span class="pre">load_str</span></em>, <em class="sig-param"><span class="pre">data_name</span></em>, <em class="sig-param"><span class="pre">options</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EEG_analysis.ERP_ERSP_data_generation.load_EEG_checkpoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>load erp and or ersp checkpoints</p>
+<dl>
+<dt><strong>Usage:</strong></dt><dd><blockquote>
+<div><ul class="simple">
+<li><p>[erp_all_data, ersp_all_data] = load_EEG_checkpoints(path, load_str, data_name,)</p></li>
+<li><p>[erp_all_data, ersp_all_data] = load_EEG_checkpoints(…, ‘save_results’, 0)</p></li>
+<li><p>[erp_all_data, ersp_all_data] = load_EEG_checkpoints(…, ‘save_path’, path)</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>Input(s):</dt><dd><ul class="simple">
+<li><p>path = path to checkpoint files with erp and ersp data</p></li>
+<li><p>load_str = unique string in checkpoint name</p></li>
+<li><p>options.save_results <strong>optional</strong> logical = 1 – 0 not to save the results</p></li>
+<li><p>options.save_path <strong>optional</strong> char = path – save path</p></li>
+</ul>
+</dd>
+<dt>Output(s):</dt><dd><ul class="simple">
+<li><p>loaded_data = erp data from all checkpoints</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Author: R.M.D. Kock, Leiden University</p>
+</dd></dl>
+
+</div>
+<div class="section" id="id1">
+<h3>ERP analysis<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="module-EEG_analysis.preprocess_EEG"></span><dl class="mat function">
+<dt id="EEG_analysis.preprocess_EEG.gettechnincallycleanEEG">
+<code class="sig-prename descclassname"><span class="pre">EEG_analysis.preprocess_EEG.</span></code><code class="sig-name descname"><span class="pre">gettechnincallycleanEEG</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">INEEG</span></em>, <em class="sig-param"><span class="pre">bandpass_upper_range</span></em>, <em class="sig-param"><span class="pre">bandpass_lower_range</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EEG_analysis.preprocess_EEG.gettechnincallycleanEEG" title="Permalink to this definition">¶</a></dt>
+<dd><p>OUTEEG = gettechnincallycleanEEG(INEEG,bandpass_upper_range)</p>
+<dl class="simple">
+<dt>Input(s):</dt><dd><ul class="simple">
+<li><p>INEEG: EEG struct to process</p></li>
+<li><p>bandpass_upper_range: Upper range for bandpass filtering of EEG data</p></li>
+</ul>
+</dd>
+</dl>
+<p>Assume 1.ICA performed, 2. Bad channels have been marked, 3. channel locations already placed 4. Electrode locations present 
+Performs the following steps</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li><p>Remove blinks according to ICA</p></li>
@@ -208,177 +269,114 @@ Added at line 43 – [INEEG] = pop_eegfiltnew(INEEG, 0.5, []);</p>
 </dd></dl>
 
 </div>
-<div class="section" id="id1">
-<h3>ERP analysis<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<span class="target" id="module-EEG_analysis.ERP"></span><dl class="mat function">
-<dt class="sig sig-object mat" id="EEG_analysis.ERP.ERP_analysis">
-<span class="sig-prename descclassname"><span class="pre">EEG_analysis.ERP.</span></span><span class="sig-name descname"><span class="pre">ERP_analysis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">EEG1_i</span></em>, <em class="sig-param"><span class="pre">EEG1_d</span></em>, <em class="sig-param"><span class="pre">participant</span></em>, <em class="sig-param"><span class="pre">indx</span></em>, <em class="sig-param"><span class="pre">all_data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EEG_analysis.ERP.ERP_analysis" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates ERP per participant</p>
-<p><strong>Usage:</strong> [all_data] = generate_all_epochs(EEG1_i, EEG1_d,participant, indx, all_data)</p>
-<dl>
-<dt>Input(s):</dt><dd><ul class="simple">
-<li><p>EEG1_i = EEG struct with epoched integral data</p></li>
-<li><p>EEG1_d = EEG struct with epoched deltas data</p></li>
-<li><p>participant = participant</p></li>
-<li><p>indx = index to place the participant data in cell</p></li>
-<li><p>all_data = cell with the epoched EEG data of other participants</p></li>
-</ul>
-</dd>
-<dt>Output(s):</dt><dd><ul class="simple">
-<li><p>all_data = cell placeholder cell with the epoched predictions of one</p></li>
-</ul>
-<dl class="simple">
-<dt>participant</dt><dd><ul class="simple">
-<li><p>all_data{indx,1} = participant</p></li>
-<li><p>all_data{indx,2} = ERP for integrals</p></li>
-<li><p>all_data{indx,3} = ERP for deltas</p></li>
-</ul>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="mat function">
-<dt class="sig sig-object mat" id="EEG_analysis.ERP.t_test_erp">
-<span class="sig-prename descclassname"><span class="pre">EEG_analysis.ERP.</span></span><span class="sig-name descname"><span class="pre">t_test_erp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">mod</span></em>, <em class="sig-param"><span class="pre">model_num</span></em>, <em class="sig-param"><span class="pre">i_path</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EEG_analysis.ERP.t_test_erp" title="Permalink to this definition">¶</a></dt>
-<dd><p>model num: 2 (model 1) or 3 (model 3)</p>
-</dd></dl>
-
-</div>
 <div class="section" id="id2">
 <h3>ERSP analysis<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<span class="target" id="module-EEG_analysis.time_freq_analysis"></span><dl class="mat function">
-<dt class="sig sig-object mat" id="EEG_analysis.time_freq_analysis.generate_all_epochs">
-<span class="sig-prename descclassname"><span class="pre">EEG_analysis.time_freq_analysis.</span></span><span class="sig-name descname"><span class="pre">generate_all_epochs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">EEG_1</span></em>, <em class="sig-param"><span class="pre">EEG_2</span></em>, <em class="sig-param"><span class="pre">participant</span></em>, <em class="sig-param"><span class="pre">indx</span></em>, <em class="sig-param"><span class="pre">all_data</span></em>, <em class="sig-param"><span class="pre">~</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EEG_analysis.time_freq_analysis.generate_all_epochs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a placeholder cell with the datasets of all participants for plotting of results</p>
-<p><strong>Usage:</strong> [bs_to_tap_predictions] = generate_bs_to_tap_model_preds(path,save_results, save_path)</p>
+<span class="target" id="module-EEG_analysis.t_tests_ERP_and_ERSP"></span><dl class="mat function">
+<dt id="EEG_analysis.t_tests_ERP_and_ERSP.main_t_tests">
+<code class="sig-prename descclassname"><span class="pre">EEG_analysis.t_tests_ERP_and_ERSP.</span></code><code class="sig-name descname"><span class="pre">main_t_tests</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">path</span></em>, <em class="sig-param"><span class="pre">options</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EEG_analysis.t_tests_ERP_and_ERSP.main_t_tests" title="Permalink to this definition">¶</a></dt>
+<dd><p>LIMO t_tests for ERP and ERSP data for AMs, NAMs, and paired t_tests</p>
 <dl>
-<dt>Input(s):</dt><dd><ul class="simple">
-<li><p>EEG1_i = EEG struct with epoched integral data</p></li>
-<li><p>EEG1_d = EEG struct with epoched deltas data</p></li>
-<li><p>participant = participant</p></li>
-<li><p>indx = index to place the participant data in cell</p></li>
-<li><p>all_data = cell with the epoched EEG data of other participants</p></li>
+<dt><strong>Usage:</strong> </dt><dd><blockquote>
+<div><ul class="simple">
+<li><p>main_t_tests(path)</p></li>
+<li><p>main_t_tests(…, ‘trials’, [50, 100])</p></li>
+<li><p>main_t_tests(…, ‘erp_all_data’, erp_all_data, ‘ersp_all_data’, ersp_all_data)</p></li>
 </ul>
-</dd>
-<dt>Output(s):</dt><dd><ul class="simple">
-<li><p>all_data = cell placeholder cell with the epoched predictions of one</p></li>
-</ul>
-<dl class="simple">
-<dt>participant</dt><dd><ul class="simple">
-<li><p>all_data{indx,1} = participant</p></li>
-<li><p>all_data{indx,2} = epoched data for integrals</p></li>
-<li><p>all_data{indx,3} = epoched data for deltas</p></li>
-</ul>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="mat function">
-<dt class="sig sig-object mat" id="EEG_analysis.time_freq_analysis.generate_spectral_data">
-<span class="sig-prename descclassname"><span class="pre">EEG_analysis.time_freq_analysis.</span></span><span class="sig-name descname"><span class="pre">generate_spectral_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">EEG_integrals_am</span></em>, <em class="sig-param"><span class="pre">EEG_integrals_nam</span></em>, <em class="sig-param"><span class="pre">participant</span></em>, <em class="sig-param"><span class="pre">indx</span></em>, <em class="sig-param"><span class="pre">all_data</span></em>, <em class="sig-param"><span class="pre">options</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EEG_analysis.time_freq_analysis.generate_spectral_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a placeholder cell with the datasets of all participants for plotting of results</p>
-<p><strong>Usage:</strong> [bs_to_tap_predictions] = generate_bs_to_tap_model_preds(path,save_results, save_path)</p>
+</div></blockquote>
 <dl class="simple">
 <dt>Input(s):</dt><dd><ul class="simple">
-<li><p>EEG_integrals_am = EEG struct with epoched integral attributable movement data</p></li>
-<li><p>EEG_integrals_nam = EEG struct with epoched integral non attributable movement data</p></li>
-<li><p>participant = participant</p></li>
-<li><p>indx = index to place the participant data in cell</p></li>
-<li><p>all_data = cell with the epoched EEG data of other participants</p></li>
-<li><p>options =</p></li>
+<li><p>path = path to checkpoint files with erp and ersp data</p></li>
+<li><p>options.trials <strong>optional</strong> double = [50] array with the minimum number of trials (example: [50, 100])</p></li>
+<li><p>options.erp_all_data = erp data generated with generate_erp_data (see required structure)</p></li>
+<li><p>options.ersp_all_data = erp data generated with generate_spectral_data (see required structure)</p></li>
 </ul>
 </dd>
 <dt>Output(s):</dt><dd><ul class="simple">
-<li><dl class="simple">
-<dt>all_data = cell placeholder cell with the epoched predictions of one participant</dt><dd><p>all_data{indx_spec,1} = sprintf(‘%s %d’, participant, selected_file_idx);
-all_data{indx_spec,2} = P_am;
-all_data{indx_spec,3} = P_nam;
-all_data{indx_spec,4} = trials_am;
-all_data{indx_spec,5} = trials_nam;
-all_data{indx_spec,6} = timesout;
-all_data{indx_spec,7} = freqs;
-all_data{indx_spec,8} = channel;</p>
-</dd>
-</dl>
-</li>
+<li><p>saves all the results from LIMO t_tests for each test in folders</p></li>
 </ul>
 </dd>
 </dl>
+</dd>
+<dt>Requires:</dt><dd><ul class="simple">
+<li><p>preprocess_erp_data.m</p></li>
+<li><p>preprocess_ersp_data.m</p></li>
+<li><p>run_t_tests_and_clustering.m</p></li>
+</ul>
+</dd>
+</dl>
+<p>Author: R.M.D. Kock, Leiden University</p>
 </dd></dl>
 
 <dl class="mat function">
-<dt class="sig sig-object mat" id="EEG_analysis.time_freq_analysis.plot_erp_selected_p">
-<span class="sig-prename descclassname"><span class="pre">EEG_analysis.time_freq_analysis.</span></span><span class="sig-name descname"><span class="pre">plot_erp_selected_p</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">channel</span></em>, <em class="sig-param"><span class="pre">power_all_p</span></em>, <em class="sig-param"><span class="pre">min_num_trials</span></em>, <em class="sig-param"><span class="pre">save_figs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EEG_analysis.time_freq_analysis.plot_erp_selected_p" title="Permalink to this definition">¶</a></dt>
-<dd><p>create median spectogram</p>
-<p><strong>Usage:</strong> [med] = plot_med_spectogram(channel, type, power_all_p, min_num_trials, save_figs)</p>
-<dl>
+<dt id="EEG_analysis.t_tests_ERP_and_ERSP.rename_add_suffix">
+<code class="sig-prename descclassname"><span class="pre">EEG_analysis.t_tests_ERP_and_ERSP.</span></code><code class="sig-name descname"><span class="pre">rename_add_suffix</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">path</span></em>, <em class="sig-param"><span class="pre">suffix</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EEG_analysis.t_tests_ERP_and_ERSP.rename_add_suffix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rename LIMO saved files by adding suffix</p>
+<p><strong>Usage:</strong> rename_add_suffix(path, action, suffix)</p>
+<blockquote>
+<div><dl class="simple">
 <dt>Input(s):</dt><dd><ul class="simple">
-<li><p>channel = (int) electrode to plot</p></li>
-<li><p>type = (string) either ‘am’ or ‘nam’</p></li>
-<li><p>power_all_p = dataset with power information and number of trials for</p></li>
-</ul>
-<p>all participants (currently generated by ERP_analysis.m)
-- min_num_trials = minimum number of trials to include data in plot
-- save_figs = save plot as figure and jpg</p>
-</dd>
-<dt>Output(s):</dt><dd><ul class="simple">
-<li><p>med = (matrix freqs x times) median power across participants</p></li>
+<li><p>path = path to saved LIMO file</p></li>
+<li><p>suffix = suffix to add behind file name</p></li>
 </ul>
 </dd>
 </dl>
-<p>Example Usage: Create spectogram of channel 16, am events for all participants
-with &gt;= 250 trials
-med = plot_med_spectogram(16, ‘nam’, power_all_p, 250, 1);</p>
-<p>prepare date by selecting subset of participants
-load the erp data</p>
+</div></blockquote>
+<p>Author: R.M.D. Kock, Leiden University</p>
 </dd></dl>
 
 <dl class="mat function">
-<dt class="sig sig-object mat" id="EEG_analysis.time_freq_analysis.plot_med_spectogram">
-<span class="sig-prename descclassname"><span class="pre">EEG_analysis.time_freq_analysis.</span></span><span class="sig-name descname"><span class="pre">plot_med_spectogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">channel</span></em>, <em class="sig-param"><span class="pre">all_data</span></em>, <em class="sig-param"><span class="pre">min_num_trials</span></em>, <em class="sig-param"><span class="pre">save_figs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EEG_analysis.time_freq_analysis.plot_med_spectogram" title="Permalink to this definition">¶</a></dt>
-<dd><p>create median spectogram</p>
-<p><strong>Usage:</strong> [med] = plot_med_spectogram(channel, type, power_all_p, min_num_trials, save_figs)</p>
-<dl>
+<dt id="EEG_analysis.t_tests_ERP_and_ERSP.run_clustering">
+<code class="sig-prename descclassname"><span class="pre">EEG_analysis.t_tests_ERP_and_ERSP.</span></code><code class="sig-name descname"><span class="pre">run_clustering</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">LIMO_paths</span></em>, <em class="sig-param"><span class="pre">significance_threshold</span></em>, <em class="sig-param"><span class="pre">channeighbstructmat</span></em>, <em class="sig-param"><span class="pre">tf</span></em>, <em class="sig-param"><span class="pre">paired</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EEG_analysis.t_tests_ERP_and_ERSP.run_clustering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepare data and calls LIMO cluster correction</p>
+<p><strong>Usage:</strong> [mask, cluster_p] = run_clustering(LIMO_paths, significance_threshold, channeighbstructmat, tf, paired)</p>
+<dl class="simple">
 <dt>Input(s):</dt><dd><ul class="simple">
-<li><p>channel = (int) electrode to plot</p></li>
-<li><p>type = (string) either ‘am’ or ‘nam’</p></li>
-<li><p>power_all_p = dataset with power information and number of trials for</p></li>
+<li><p>LIMO_paths = path where data is saved</p></li>
+<li><p>significance_threshold = significance threshold for the clustering</p></li>
+<li><p>channeighbstructmat (name value argument default will load the file if present on path) = struct with information on what electrodes are neighbors with each other</p></li>
+<li><p>tf (logical) = 1 if time frequency analysis and 0 if erp analysis</p></li>
+<li><p>paired (logical) = 1 if paired ttest is used and 0 if one sample ttest</p></li>
 </ul>
-<p>all participants (currently generated by ERP_analysis.m)
-- min_num_trials = minimum number of trials to include data in plot
-- save_figs = save plot as figure and jpg</p>
 </dd>
 <dt>Output(s):</dt><dd><ul class="simple">
-<li><p>med = (matrix freqs x times) median power across participants</p></li>
+<li><p>maks = a binary matrix of significant/non-significant cells</p></li>
+<li><p>cluster_p = a matrix of cluster corrected p-values</p></li>
+</ul>
+</dd>
+<dt>Requires:</dt><dd><ul class="simple">
+<li><p>limo_ft_cluster_test.m</p></li>
+<li><p>limo_ft_cluster_correction.m</p></li>
 </ul>
 </dd>
 </dl>
-<p>Example Usage: Create spectogram of channel 16, am events for all participants
-with &gt;= 250 trials
-med = plot_med_spectogram(16, all_data, 250, 1);</p>
-<p>selected_participants = power_all_p(cell2mat(power_all_p(:,7)) == channel &amp; strcmp(power_all_p(:,6), ‘nam’) &amp; cell2mat(power_all_p(:,4)) &gt;= min_num_trials, 5);
-[C] = ismember(power_all_p(:,5), selected_participants);
-x = power_all_p(cell2mat(power_all_p(:,7)) == channel &amp; strcmp(power_all_p(:,6), type) &amp; C, 1);
-AM</p>
+<p>Author: R.M.D. Kock, Leiden University</p>
 </dd></dl>
 
-<dl class="mat script">
-<dt class="sig sig-object mat" id="EEG_analysis.time_freq_analysis.spectral_data">
-<span class="sig-prename descclassname"><span class="pre">EEG_analysis.time_freq_analysis.</span></span><span class="sig-name descname"><span class="pre">spectral_data</span></span><a class="headerlink" href="#EEG_analysis.time_freq_analysis.spectral_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>get the file names for all participants</p>
+<dl class="mat function">
+<dt id="EEG_analysis.t_tests_ERP_and_ERSP.run_t_tests_and_clustering">
+<code class="sig-prename descclassname"><span class="pre">EEG_analysis.t_tests_ERP_and_ERSP.</span></code><code class="sig-name descname"><span class="pre">run_t_tests_and_clustering</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">unique_name</span></em>, <em class="sig-param"><span class="pre">paired</span></em>, <em class="sig-param"><span class="pre">tf</span></em>, <em class="sig-param"><span class="pre">data1</span></em>, <em class="sig-param"><span class="pre">data2</span></em>, <em class="sig-param"><span class="pre">options</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EEG_analysis.t_tests_ERP_and_ERSP.run_t_tests_and_clustering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a placeholder cell with the datasets of all participants for plotting of results</p>
+<p><strong>Usage:</strong> [erp_data, ams, nams] = preprocess_erp_data(erp_data, paired, min_num_trials)</p>
+<dl class="simple">
+<dt>Input(s):</dt><dd><ul class="simple">
+<li><p>unique_name = folder name to save the data and also added as a suffix to the file names</p></li>
+<li><p>paired (logical) = 1 if paired ttest is used and 0 if one sample ttest</p></li>
+<li><p>tf (logical) = 1 if time frequency analysis and 0 if erp analysis</p></li>
+<li><p>data1 = data for t test</p></li>
+<li><p>data2 (optional only required if paired is 1) = data for paired samples t test</p></li>
+<li><p>significance_threshold (name value argument default : 0.05) = threshold for bootstrap significance testing</p></li>
+<li><p>bootstrap (name value argument default : 1000) = number of bootstraps to perform</p></li>
+<li><p>channeighbstructmat (name value argument default will load the file if present on path) = struct with information on what electrodes are neighbors with each other</p></li>
+<li><p>expected_chanlocs (name value argument default will load the file if present on path) = struct expected channel locations</p></li>
+</ul>
+</dd>
+<dt>Output(s):</dt><dd><ul class="simple">
+<li><p>LIMO_path = path where data is saved</p></li>
+</ul>
+</dd>
+</dl>
+<p>Author: R.M.D. Kock, Leiden University</p>
 </dd></dl>
-
-</div>
-<div class="section" id="module-EEG_analysis.result_plotting">
-<span id="result-plotting"></span><h3>Result plotting<a class="headerlink" href="#module-EEG_analysis.result_plotting" title="Permalink to this headline">¶</a></h3>
-<dl class="mat script">
-<dt class="sig sig-object mat" id="EEG_analysis.result_plotting.erp_plots">
-<span class="sig-prename descclassname"><span class="pre">EEG_analysis.result_plotting.</span></span><span class="sig-name descname"><span class="pre">erp_plots</span></span><a class="headerlink" href="#EEG_analysis.result_plotting.erp_plots" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 </div>
 </div>
@@ -398,10 +396,9 @@ AM</p>
 <li><a class="reference internal" href="#ersp-analysis">ERSP analysis</a></li>
 <li><a class="reference internal" href="#directory-structure">Directory structure</a></li>
 <li><a class="reference internal" href="#code">Code</a><ul>
-<li><a class="reference internal" href="#module-EEG_analysis.preprocess_EEG">Pre-Processing</a></li>
+<li><a class="reference internal" href="#module-EEG_analysis.ERP_ERSP_data_generation">Pre-Processing</a></li>
 <li><a class="reference internal" href="#id1">ERP analysis</a></li>
 <li><a class="reference internal" href="#id2">ERSP analysis</a></li>
-<li><a class="reference internal" href="#module-EEG_analysis.result_plotting">Result plotting</a></li>
 </ul>
 </li>
 </ul>
@@ -425,7 +422,7 @@ AM</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -456,7 +453,7 @@ AM</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright .
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
     </div>
   </body>
 </html>

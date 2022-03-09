@@ -101,11 +101,11 @@ Model results
 
 Model file:
 
-`MA_inverted_full.json <../../../models/alignment_models/MA_inverted_full.json>`__
+`MA_inverted_full.json <../../../models/MA_inverted_full.json>`__
 
 Weights file:
 
-`MA_inverted_full_weights.h5 <../../../models/alignment_models/MA_inverted_full_weights.h5>`__
+`MA_inverted_full_weights.h5 <../../../models/MA_inverted_full_weights.h5>`__
 
 Training loss 0.1207 – Validition loss – Test loss
 
@@ -128,8 +128,6 @@ Directory structure
    |   |   +-- main_lstm_MA.m --> calls all functions for prediction or data generation
    |   +-- training --> Scripts to train the model(s)
    |   |   +-- lstm_MA.py --> trains the model and saves weights and model structure
-   |   +-- result_plotting
-   |   |   +--  **TODO**
 
 Code
 ---------

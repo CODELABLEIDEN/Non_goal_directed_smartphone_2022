@@ -6,10 +6,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Startup guide &#8212; Non attribute movement and EEG 0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -26,9 +26,6 @@
         <li class="right" >
           <a href="mat-modindex.html" title="MATLAB Module Index"
              >matlab index</a> |</li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Non attribute movement and EEG 0.1 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Startup guide</a></li> 
       </ul>
@@ -226,17 +223,17 @@ Note this file is the same file as generated at step 1 from model training. Howe
 <ol class="simple">
 <li><p>(Optional) Save model predictions inside EEG struct</p></li>
 </ol>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% matlab</span>
-<span class="c">% Path to raw data</span>
-<span class="n">raw_data_path</span> <span class="p">=</span> <span class="s">&#39;/media/Storage/Common_Data_Storage/EEG/Feb_2018_2020_RUSHMA_ProcessedEEG&#39;</span><span class="p">;</span>
-<span class="c">% Path to location to save the EEG structs</span>
-<span class="n">save_path_upper</span> <span class="p">=</span> <span class="s">&#39;/media/Storage/User_Specific_Data_Storage/ruchella/Oct_2021_BS_to_tap_classification_EEG&#39;</span><span class="p">;</span>
-<span class="c">% Path to generated h5 file from step 2</span>
-<span class="n">path_saved_predictions</span> <span class="p">=</span> <span class="s">&#39;~/non_attribute_movement_and_EEG/data/bs_to_tap/predicted_file.h5&#39;</span><span class="p">;</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% matlab</span><span class="w"></span>
+<span class="c">% Path to raw data</span><span class="w"></span>
+<span class="n">raw_data_path</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;/media/Storage/Common_Data_Storage/EEG/Feb_2018_2020_RUSHMA_ProcessedEEG&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="c">% Path to location to save the EEG structs</span><span class="w"></span>
+<span class="n">save_path_upper</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;/media/Storage/User_Specific_Data_Storage/ruchella/Oct_2021_BS_to_tap_classification_EEG&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="c">% Path to generated h5 file from step 2</span><span class="w"></span>
+<span class="n">path_saved_predictions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;~/non_attribute_movement_and_EEG/data/bs_to_tap/predicted_file.h5&#39;</span><span class="p">;</span><span class="w"></span>
 
-<span class="n">paths</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">}</span> <span class="p">=</span> <span class="n">raw_data_path</span><span class="p">;</span> <span class="n">paths</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">}</span> <span class="p">=</span> <span class="n">save_path_upper</span><span class="p">;</span> <span class="n">paths</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">}</span> <span class="p">=</span> <span class="n">path_saved_predictions</span><span class="p">;</span>
-<span class="n">f</span> <span class="p">=</span> <span class="p">@</span><span class="n">save_predictions</span><span class="p">;</span>
-<span class="p">[</span><span class="n">EEG</span><span class="p">]</span> <span class="p">=</span> <span class="n">call_func_for_all_participants</span><span class="p">(</span><span class="n">raw_data_path</span><span class="p">,</span><span class="n">paths</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="s">&#39;load_eeg&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="n">paths</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">}</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">raw_data_path</span><span class="p">;</span><span class="w"> </span><span class="n">paths</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">}</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">save_path_upper</span><span class="p">;</span><span class="w"> </span><span class="n">paths</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">}</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">path_saved_predictions</span><span class="p">;</span><span class="w"></span>
+<span class="n">f</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@</span><span class="n">save_predictions</span><span class="p">;</span><span class="w"></span>
+<span class="p">[</span><span class="n">EEG</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">call_func_for_all_participants</span><span class="p">(</span><span class="n">raw_data_path</span><span class="p">,</span><span class="n">paths</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="s">&#39;load_eeg&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -245,53 +242,53 @@ Note this file is the same file as generated at step 1 from model training. Howe
 <ol class="simple">
 <li><p>Prepare the necessary data sets:</p></li>
 </ol>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">%% Gather all saved bs_to_tap predictions in a cell</span>
-<span class="c">% path to data with bs_to_tap model predictions</span>
-<span class="n">path</span> <span class="p">=</span> <span class="s">&#39;/media/Storage/User_Specific_Data_Storage/ruchella/July_2021_BS_to_tap_classification_EEG&#39;</span><span class="p">;</span>
-<span class="c">% path to save the cell</span>
-<span class="n">save_path</span> <span class="p">=</span> <span class="s">&#39;/home/ruchella/non_attribute_movement_and_EEG/data/bs_to_tap_predictions.mat&#39;</span><span class="p">;</span>
-<span class="p">[</span><span class="n">bs_to_tap_predictions</span><span class="p">]</span> <span class="p">=</span> <span class="n">generate_bs_to_tap_model_preds</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">save_path</span><span class="p">);</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">%% Gather all saved bs_to_tap predictions in a cell</span><span class="w"></span>
+<span class="c">% path to data with bs_to_tap model predictions</span><span class="w"></span>
+<span class="nb">path</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;/media/Storage/User_Specific_Data_Storage/ruchella/July_2021_BS_to_tap_classification_EEG&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="c">% path to save the cell</span><span class="w"></span>
+<span class="n">save_path</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;/home/ruchella/non_attribute_movement_and_EEG/data/bs_to_tap_predictions.mat&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="p">[</span><span class="n">bs_to_tap_predictions</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">generate_bs_to_tap_model_preds</span><span class="p">(</span><span class="nb">path</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">save_path</span><span class="p">);</span><span class="w"></span>
 
-<span class="c">%% Gather all ams and nams in a cell</span>
-<span class="c">% path to data with bs_to_tap model predictions</span>
-<span class="n">path</span> <span class="p">=</span> <span class="s">&#39;/media/Storage/User_Specific_Data_Storage/ruchella/July_2021_BS_to_tap_classification_EEG&#39;</span><span class="p">;</span>
-<span class="c">% path to save the cell</span>
-<span class="n">save_path</span> <span class="p">=</span> <span class="s">&#39;/home/ruchella/non_attribute_movement_and_EEG/data/all_epochs.mat&#39;</span><span class="p">;</span>
-<span class="n">f</span> <span class="p">=</span> <span class="p">@</span><span class="n">generate_all_epochs</span><span class="p">;</span>
-<span class="p">[</span><span class="n">all_data</span><span class="p">]</span> <span class="p">=</span> <span class="n">call_func_for_all_participants_eeg</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">save_path</span><span class="p">,</span><span class="n">f</span><span class="p">);</span>
+<span class="c">%% Gather all ams and nams in a cell</span><span class="w"></span>
+<span class="c">% path to data with bs_to_tap model predictions</span><span class="w"></span>
+<span class="nb">path</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;/media/Storage/User_Specific_Data_Storage/ruchella/July_2021_BS_to_tap_classification_EEG&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="c">% path to save the cell</span><span class="w"></span>
+<span class="n">save_path</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;/home/ruchella/non_attribute_movement_and_EEG/data/all_epochs.mat&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="n">f</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@</span><span class="n">generate_all_epochs</span><span class="p">;</span><span class="w"></span>
+<span class="p">[</span><span class="n">all_data</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">call_func_for_all_participants_eeg</span><span class="p">(</span><span class="nb">path</span><span class="p">,</span><span class="n">save_path</span><span class="p">,</span><span class="n">f</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <ol class="simple">
 <li><p>(Optional) Alternatively the data can be downloaded at: <strong>TODO</strong>. If downloaded, load the files.</p></li>
 </ol>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">load</span><span class="p">(</span><span class="s">&#39;~/Non_attribute_movement_and_EEG/data/bs_to_tap_predictions.mat&#39;</span><span class="p">)</span>
-<span class="n">load</span><span class="p">(</span><span class="s">&#39;~/Non_attribute_movement_and_EEG/data/all_epochs.mat&#39;</span><span class="p">)</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">load</span><span class="p">(</span><span class="s">&#39;~/Non_attribute_movement_and_EEG/data/bs_to_tap_predictions.mat&#39;</span><span class="p">)</span><span class="w"></span>
+<span class="nb">load</span><span class="p">(</span><span class="s">&#39;~/Non_attribute_movement_and_EEG/data/all_epochs.mat&#39;</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 <ol class="simple">
 <li><p>Find the AMs and NAMs</p></li>
 </ol>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">s_i</span><span class="p">,</span><span class="n">s_d</span><span class="p">,</span><span class="n">taps</span><span class="p">]</span> <span class="p">=</span> <span class="n">get_ams_nam</span><span class="p">(</span><span class="n">bs_to_tap_predictions</span><span class="p">);</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">s_i</span><span class="p">,</span><span class="n">s_d</span><span class="p">,</span><span class="n">taps</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">get_ams_nam</span><span class="p">(</span><span class="n">bs_to_tap_predictions</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <ol class="simple">
 <li><p>Create the figures</p></li>
 </ol>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Figure 1 - B</span>
-<span class="n">plot_bs_shape_tl_ams_nams</span><span class="p">(</span><span class="n">bs_to_tap_predictions</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&#39;s_i&#39;</span><span class="p">,</span> <span class="n">s_i</span><span class="p">,</span> <span class="s">&#39;s_d&#39;</span><span class="p">,</span><span class="n">s_d</span><span class="p">,</span> <span class="s">&#39;taps&#39;</span><span class="p">,</span> <span class="n">taps</span><span class="p">)</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Figure 1 - B</span><span class="w"></span>
+<span class="n">plot_bs_shape_tl_ams_nams</span><span class="p">(</span><span class="n">bs_to_tap_predictions</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;s_i&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">s_i</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;s_d&#39;</span><span class="p">,</span><span class="n">s_d</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;taps&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">taps</span><span class="p">)</span><span class="w"></span>
 
-<span class="c">% Figure 1 - C</span>
-<span class="n">figure_name</span> <span class="p">=</span> <span class="s">&#39;BS_freq_ams_nams&#39;</span><span class="p">;</span>
-<span class="n">plot_freq_ams_nams</span><span class="p">(</span><span class="n">bs_to_tap_predictions</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&#39;s_i&#39;</span><span class="p">,</span> <span class="n">s_i</span><span class="p">,</span> <span class="s">&#39;s_d&#39;</span><span class="p">,</span><span class="n">s_d</span><span class="p">,</span> <span class="s">&#39;taps&#39;</span><span class="p">,</span> <span class="n">taps</span><span class="p">,</span><span class="s">&#39;plot_integrals&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="c">% Figure 1 - C</span><span class="w"></span>
+<span class="n">figure_name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;BS_freq_ams_nams&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="n">plot_freq_ams_nams</span><span class="p">(</span><span class="n">bs_to_tap_predictions</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;s_i&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">s_i</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;s_d&#39;</span><span class="p">,</span><span class="n">s_d</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;taps&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">taps</span><span class="p">,</span><span class="s">&#39;plot_integrals&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
 
-<span class="c">% Figure 1 - D</span>
-<span class="n">plot_density_am_nams</span><span class="p">(</span><span class="n">all_epochs</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="c">% Figure 1 - E</span>
-<span class="n">plot_inter_event_intervals</span><span class="p">(</span><span class="n">all_epochs</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="c">% Figure 1 - D</span><span class="w"></span>
+<span class="n">plot_density_am_nams</span><span class="p">(</span><span class="n">all_epochs</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+<span class="c">% Figure 1 - E</span><span class="w"></span>
+<span class="n">plot_inter_event_intervals</span><span class="p">(</span><span class="n">all_epochs</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
 
-<span class="c">% Supplementary Figure 1</span>
-<span class="n">figure_name</span> <span class="p">=</span> <span class="s">&#39;BS_pred_ams_nams&#39;</span><span class="p">;</span>
-<span class="n">plot_pred_tl_ams_nams</span><span class="p">(</span><span class="n">bs_to_tap_predictions</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&#39;s_i&#39;</span><span class="p">,</span> <span class="n">s_i</span><span class="p">,</span> <span class="s">&#39;s_d&#39;</span><span class="p">,</span><span class="n">s_d</span><span class="p">,</span> <span class="s">&#39;taps&#39;</span><span class="p">,</span> <span class="n">taps</span><span class="p">)</span>
+<span class="c">% Supplementary Figure 1</span><span class="w"></span>
+<span class="n">figure_name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;BS_pred_ams_nams&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="n">plot_pred_tl_ams_nams</span><span class="p">(</span><span class="n">bs_to_tap_predictions</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;s_i&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">s_i</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;s_d&#39;</span><span class="p">,</span><span class="n">s_d</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;taps&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">taps</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -353,7 +350,7 @@ Note this file is the same file as generated at step 1 from model training. Howe
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -372,16 +369,13 @@ Note this file is the same file as generated at step 1 from model training. Howe
         <li class="right" >
           <a href="mat-modindex.html" title="MATLAB Module Index"
              >matlab index</a> |</li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Non attribute movement and EEG 0.1 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Startup guide</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright .
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
     </div>
   </body>
 </html>

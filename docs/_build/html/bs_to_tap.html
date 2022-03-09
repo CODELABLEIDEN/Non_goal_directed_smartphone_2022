@@ -6,10 +6,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bendsensor to Tap models &#8212; Non attribute movement and EEG 0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -151,8 +151,8 @@ predictions</p></li>
 <div class="section" id="module-bs_to_tap.features">
 <span id="features"></span><h3>Features<a class="headerlink" href="#module-bs_to_tap.features" title="Permalink to this headline">¶</a></h3>
 <dl class="mat function">
-<dt class="sig sig-object mat" id="bs_to_tap.features.change_sequence_precision">
-<span class="sig-prename descclassname"><span class="pre">bs_to_tap.features.</span></span><span class="sig-name descname"><span class="pre">change_sequence_precision</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">Phone</span></em>, <em class="sig-param"><span class="pre">pad_length</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bs_to_tap.features.change_sequence_precision" title="Permalink to this definition">¶</a></dt>
+<dt id="bs_to_tap.features.change_sequence_precision">
+<code class="sig-prename descclassname"><span class="pre">bs_to_tap.features.</span></code><code class="sig-name descname"><span class="pre">change_sequence_precision</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">Phone</span></em>, <em class="sig-param"><span class="pre">pad_length</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bs_to_tap.features.change_sequence_precision" title="Permalink to this definition">¶</a></dt>
 <dd><p>The tap measurement may be off by about +/- 10 taps, this function pads
 the data with this difference</p>
 <p><strong>Usage:</strong> [decreased_precision_phone] = change_sequence_precision(Phone, pad_length)</p>
@@ -167,14 +167,14 @@ the data with this difference</p>
 </ul>
 </dd>
 </dl>
-<p>Author: R.M.D. Kock</p>
+<p>Author: R.M.D. Kock, Leiden University</p>
 </dd></dl>
 
 <dl class="mat function">
-<dt class="sig sig-object mat" id="bs_to_tap.features.create_hdf5">
-<span class="sig-prename descclassname"><span class="pre">bs_to_tap.features.</span></span><span class="sig-name descname"><span class="pre">create_hdf5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">EEG</span></em>, <em class="sig-param"><span class="pre">inner_loop_idx</span></em>, <em class="sig-param"><span class="pre">participant</span></em>, <em class="sig-param"><span class="pre">save_path</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bs_to_tap.features.create_hdf5" title="Permalink to this definition">¶</a></dt>
+<dt id="bs_to_tap.features.create_hdf5">
+<code class="sig-prename descclassname"><span class="pre">bs_to_tap.features.</span></code><code class="sig-name descname"><span class="pre">create_hdf5</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">EEG</span></em>, <em class="sig-param"><span class="pre">inner_loop_idx</span></em>, <em class="sig-param"><span class="pre">participant</span></em>, <em class="sig-param"><span class="pre">save_path</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bs_to_tap.features.create_hdf5" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create hdf file with data for model training</p>
-<p><strong>Usage:</strong> create_hdf_MA(EEG, inner_loop_idx, participant, save_path)</p>
+<p><strong>Usage:</strong> create_hdf(EEG, inner_loop_idx, participant, save_path)</p>
 <dl class="simple">
 <dt>Input(s):</dt><dd><ul class="simple">
 <li><p>EEG = EEG struct</p></li>
@@ -193,12 +193,12 @@ Example: ‘data/bs_to_tap_train_data/feature_files.h5’</p></li>
 </ul>
 </dd>
 </dl>
-<p>Author: R.M.D. Kock</p>
+<p>Author: R.M.D. Kock, Leiden University</p>
 </dd></dl>
 
 <dl class="mat function">
-<dt class="sig sig-object mat" id="bs_to_tap.features.delta_mod">
-<span class="sig-prename descclassname"><span class="pre">bs_to_tap.features.</span></span><span class="sig-name descname"><span class="pre">delta_mod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bs_to_tap.features.delta_mod" title="Permalink to this definition">¶</a></dt>
+<dt id="bs_to_tap.features.delta_mod">
+<code class="sig-prename descclassname"><span class="pre">bs_to_tap.features.</span></code><code class="sig-name descname"><span class="pre">delta_mod</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bs_to_tap.features.delta_mod" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the difference (delta) between two points</p>
 <p><strong>Usage:</strong> [deltas] = delta_mod(data)</p>
 <dl class="simple">
@@ -211,12 +211,12 @@ Example: ‘data/bs_to_tap_train_data/feature_files.h5’</p></li>
 </ul>
 </dd>
 </dl>
-<p>Author: R.M.D. Kock</p>
+<p>Author: R.M.D. Kock, Leiden University</p>
 </dd></dl>
 
 <dl class="mat function">
-<dt class="sig sig-object mat" id="bs_to_tap.features.delta_sigma_mod">
-<span class="sig-prename descclassname"><span class="pre">bs_to_tap.features.</span></span><span class="sig-name descname"><span class="pre">delta_sigma_mod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bs_to_tap.features.delta_sigma_mod" title="Permalink to this definition">¶</a></dt>
+<dt id="bs_to_tap.features.delta_sigma_mod">
+<code class="sig-prename descclassname"><span class="pre">bs_to_tap.features.</span></code><code class="sig-name descname"><span class="pre">delta_sigma_mod</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bs_to_tap.features.delta_sigma_mod" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the integral between two points</p>
 <p><strong>Usage:</strong> [trapz_ints] = delta_sigma_mod(data)</p>
 <dl class="simple">
@@ -229,19 +229,48 @@ Example: ‘data/bs_to_tap_train_data/feature_files.h5’</p></li>
 </ul>
 </dd>
 </dl>
-<p>Author: R.M.D. Kock</p>
-</dd></dl>
-
-<dl class="mat script">
-<dt class="sig sig-object mat" id="bs_to_tap.features.prepare_features">
-<span class="sig-prename descclassname"><span class="pre">bs_to_tap.features.</span></span><span class="sig-name descname"><span class="pre">prepare_features</span></span><a class="headerlink" href="#bs_to_tap.features.prepare_features" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prepare data for training. 
-Does the following steps: pre-process BS, align using decision tree,</p>
+<p>Author: R.M.D. Kock, Leiden University</p>
 </dd></dl>
 
 <dl class="mat function">
-<dt class="sig sig-object mat" id="bs_to_tap.features.seperate_sequences">
-<span class="sig-prename descclassname"><span class="pre">bs_to_tap.features.</span></span><span class="sig-name descname"><span class="pre">seperate_sequences</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">sequence</span></em>, <em class="sig-param"><span class="pre">sequence_length</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bs_to_tap.features.seperate_sequences" title="Permalink to this definition">¶</a></dt>
+<dt id="bs_to_tap.features.prepare_features">
+<code class="sig-prename descclassname"><span class="pre">bs_to_tap.features.</span></code><code class="sig-name descname"><span class="pre">prepare_features</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">EEG</span></em>, <em class="sig-param"><span class="pre">feature</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bs_to_tap.features.prepare_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepare data for training. 
+Does the following steps: pre-process BS, align using decision tree, 
+extract features from BS, extract idle sequences from both
+BS and Phone taps, normalize BS, change the sequence precision of Phone
+taps, seperate sequences into multiple 10 mins windows</p>
+<p><strong>Usage:</strong> [processed_BS, processed_phone, BS] = prepare_features(EEG, feature)</p>
+<dl class="simple">
+<dt>Input(s):</dt><dd><ul class="simple">
+<li><p>EEG : EEG data struct</p></li>
+<li><p>feature : Bool 0 = integrals, 1 = deltas</p></li>
+</ul>
+</dd>
+<dt>Output(s):</dt><dd><ul class="simple">
+<li><p>processed_BS : processed BS features</p></li>
+<li><p>processed_phone : processed phone data</p></li>
+<li><p>BS : processed bensensor data</p></li>
+</ul>
+</dd>
+<dt>Requires:</dt><dd><ul class="simple">
+<li><p>getcleanedbsdata.m (in Utils)</p></li>
+<li><p>remove_inactive_bs.m (in Utils)</p></li>
+<li><p>get_phone_data.m (in Utils)</p></li>
+<li><p>decision_tree_alignment.m (in Alignment)</p></li>
+<li><p>delta_mod.m</p></li>
+<li><p>delta_sigma_mod.m</p></li>
+<li><p>change_sequence_precision.m</p></li>
+<li><p>seperate_sequences.m</p></li>
+</ul>
+</dd>
+</dl>
+<p>Author: R.M.D. Kock, Leiden University</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt id="bs_to_tap.features.seperate_sequences">
+<code class="sig-prename descclassname"><span class="pre">bs_to_tap.features.</span></code><code class="sig-name descname"><span class="pre">seperate_sequences</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">sequence</span></em>, <em class="sig-param"><span class="pre">sequence_length</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bs_to_tap.features.seperate_sequences" title="Permalink to this definition">¶</a></dt>
 <dd><p>Seperates input data into multiple sequences of a chosen length</p>
 <p><strong>Usage:</strong> [divided_phone] = seperate_sequences(sequence, sequence_length)</p>
 <dl>
@@ -256,27 +285,22 @@ Does the following steps: pre-process BS, align using decision tree,</p>
 <p>sequences.</p>
 </dd>
 </dl>
-<p>Author: R.M.D. Kock</p>
+<p>Author: R.M.D. Kock, Leiden University</p>
 </dd></dl>
 
 </div>
 <div class="section" id="training">
 <h3>Training<a class="headerlink" href="#training" title="Permalink to this headline">¶</a></h3>
-<dl class="py class">
-<dt class="sig sig-object py" id="bs_to_tap.training.bs_to_tap.BatchGenerator">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">bs_to_tap.training.bs_to_tap.</span></span><span class="sig-name descname"><span class="pre">BatchGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">data</span></em>, <em class="sig-param"><span class="pre">indexes</span></em>, <em class="sig-param"><span class="pre">samples</span></em>, <em class="sig-param"><span class="pre">num_features_bs</span></em>, <em class="sig-param"><span class="pre">num_features_fs</span></em>, <em class="sig-param"><span class="pre">timesteps</span></em>, <em class="sig-param"><span class="pre">data_type</span></em>, <em class="sig-param"><span class="pre">max_random_count=1000</span></em>, <em class="sig-param"><span class="pre">standardize_fun=&lt;function</span> <span class="pre">standardize&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bs_to_tap.training.bs_to_tap.BatchGenerator" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 </div>
 <div class="section" id="module-bs_to_tap.predict">
 <span id="prediction"></span><h3>Prediction<a class="headerlink" href="#module-bs_to_tap.predict" title="Permalink to this headline">¶</a></h3>
 <dl class="mat function">
-<dt class="sig sig-object mat" id="bs_to_tap.predict.read_predictions">
-<span class="sig-prename descclassname"><span class="pre">bs_to_tap.predict.</span></span><span class="sig-name descname"><span class="pre">read_predictions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">participant</span></em>, <em class="sig-param"><span class="pre">path_saved_predictions</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bs_to_tap.predict.read_predictions" title="Permalink to this definition">¶</a></dt>
+<dt id="bs_to_tap.predict.read_predictions">
+<code class="sig-prename descclassname"><span class="pre">bs_to_tap.predict.</span></code><code class="sig-name descname"><span class="pre">read_predictions</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">participant</span></em>, <em class="sig-param"><span class="pre">path_saved_predictions</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bs_to_tap.predict.read_predictions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prepare data for training.
 Reads the predictions, of the bs_to_tap models, saved as h5 file,
 for all files from one participant</p>
-<p><strong>Usage:</strong> [all_predictions_read] = read_predictions(participant, path)</p>
+<p><strong>Usage:</strong> [all_predictions_read] = read_predictions(participant, path_saved_predictions)</p>
 <dl class="simple">
 <dt>Input(s):</dt><dd><ul class="simple">
 <li><p>participant : char participant name to be read</p></li>
@@ -284,19 +308,30 @@ for all files from one participant</p>
 </ul>
 </dd>
 <dt>Output(s):</dt><dd><ul class="simple">
-<li><p>all_predictions_read : parsed predictions of all the files for one participant</p></li>
+<li><dl class="simple">
+<dt>all_predictions_read<span class="classifier">cell parsed predictions of all the files for one participant</span></dt><dd><p>all_predictions_read{file_idx,1} = participant folder name;
+all_predictions_read{file_idx,2} = integral predictions;
+all_predictions_read{file_idx,3} = deltas predictions;
+all_predictions_read{file_idx,4} = optimal threshold intergals;
+all_predictions_read{file_idx,5} = optimal threshold deltas;
+all_predictions_read{file_idx,6} = all thresholds intergals for all splits;
+all_predictions_read{file_idx,7} = all thresholds deltas for all splits;
+where file_idx is index for every file in the folder</p>
+</dd>
+</dl>
+</li>
 </ul>
 </dd>
 </dl>
-<p>Author: R.M.D. Kock</p>
+<p>Author: R.M.D. Kock, Leiden University</p>
 </dd></dl>
 
 <dl class="mat function">
-<dt class="sig sig-object mat" id="bs_to_tap.predict.save_predictions">
-<span class="sig-prename descclassname"><span class="pre">bs_to_tap.predict.</span></span><span class="sig-name descname"><span class="pre">save_predictions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">~</span></em>, <em class="sig-param"><span class="pre">~</span></em>, <em class="sig-param"><span class="pre">participant</span></em>, <em class="sig-param"><span class="pre">paths</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bs_to_tap.predict.save_predictions" title="Permalink to this definition">¶</a></dt>
+<dt id="bs_to_tap.predict.save_predictions">
+<code class="sig-prename descclassname"><span class="pre">bs_to_tap.predict.</span></code><code class="sig-name descname"><span class="pre">save_predictions</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">~</span></em>, <em class="sig-param"><span class="pre">~</span></em>, <em class="sig-param"><span class="pre">participant</span></em>, <em class="sig-param"><span class="pre">paths</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bs_to_tap.predict.save_predictions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save the predictions in EEG struct format
 Save the predictions for one participant in EEG struct format</p>
-<p><strong>Usage:</strong> [EEG] = save_predictions(~,~,participant, paths)</p>
+<p><strong>Usage:</strong> save_predictions([],[],participant, paths)</p>
 <dl class="simple">
 <dt>Input(s):</dt><dd><ul class="simple">
 <li><p>participant = string participant name to be read</p></li>
@@ -316,11 +351,30 @@ Save the predictions for one participant in EEG struct format</p>
 </ul>
 </dd>
 <dt>Output(s):</dt><dd><ul class="simple">
-<li><p>EEG : EEG struct</p></li>
+<li><dl class="simple">
+<dt>Saves a set file with these fields added</dt><dd><p>EEG.Aligned.BS_to_tap.Phone : phone data
+EEG.Aligned.BS_to_tap.integrals : integral model predictions
+EEG.Aligned.BS_to_tap.deltas : delta model predictions
+EEG.Aligned.BS_to_tap.BS : preprocessed bendesensor data
+EEG.Aligned.BS_to_tap.threshold_i : optimal threshold for integral
+EEG.Aligned.BS_to_tap.threshold_d : optimal threshold for deltas
+EEG.Aligned.BS_to_tap.all_threshold_i : optimal thresholds for all file splits integral
+EEG.Aligned.BS_to_tap.all_threshold_d : optimal thresholds for all file splits deltas</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt>Requires:</dt><dd><ul class="simple">
+<li><p>read_predictions.m</p></li>
+<li><p>get_phone_data.m</p></li>
+<li><p>getcleanedbsdata.m</p></li>
+<li><p>decision_tree_alignment.m</p></li>
+<li><p>remove_inactive_bs.m</p></li>
 </ul>
 </dd>
 </dl>
-<p>Author: R.M.D. Kock</p>
+<p>Author: R.M.D. Kock, Leiden University</p>
 </dd></dl>
 
 </div>
@@ -375,7 +429,7 @@ Save the predictions for one participant in EEG struct format</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -406,7 +460,7 @@ Save the predictions for one participant in EEG struct format</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright .
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
     </div>
   </body>
 </html>

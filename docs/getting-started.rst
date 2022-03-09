@@ -9,7 +9,7 @@ related installations.
 
 .. note:: The paths used in this project are all relative to the position in which this repository is cloned. It assumes you are inside the cloned repository. Change the paths when necessary.
 
-.. note:: Throughout this documentation you will see the word tap or smartphone interaction (SI) used interchangeably they refer to the same things. Furthermore the abbreviation of bendsensor (BS) and forcesensor (FS) are also used.
+.. note:: Throughout this documentation you will see the word tap or smartphone interaction (SI) or touchscreen interaction used interchangeably they refer to the same things. Furthermore, the abbreviation of bendsensor (BS) and forcesensor (FS) are also used. Finally goal-directed (GD) movements are sometimes referred as attributable movements (AMs) and non-goal-directed (NGD) are referred to as non-attributable_movements (NAMs).
 
 Matlab startup
 ^^^^^^^^^^^^^^
@@ -98,9 +98,6 @@ Model training
 The data preparation for training is done in Matlab. The alignment model is trained in python.
 
 1. Prepare the raw data for training and save as h5 file.
-
-  An existing h5 file can be downloaded at: **TODO**
-
 2. Run the lstm\_MA.py script
 
    ::
@@ -121,21 +118,10 @@ The data preparation for training is done in Matlab. The alignment model is trai
 
 Using pre-trained alignment model
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The pre-trained model weight files can be downloaded at: **TODO**
+The pre-trained model weight files can be found in  the *'models'* folder.
 
 The model can be imported into matlab or python for prediction. In this project, it has been implemented via Matlab. However, the weights file can be imported via python and the prediction performed there since it is a Keras model.
 
-Predicting via Matlab
-~~~~~~~~~~~~~~~~~~~~~
-
-**TODO**
-
-Accessing model predictions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The prediction has already been performed for all the participants and saved in the EEG struct in the following location:
-
-- EEG.Aligned.BS.model
 
 Using the aligned BS data
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -155,7 +141,6 @@ The data preparation for training is done in Matlab. The BS to tap model is trai
 .. _step_1_bs_to_tap:
 
 1. Prepare the raw data for training and save it as an h5 file.
-   An existing h5 file can be downloaded at. **TODO**
 2. Run the lstm\_MA.py script
 
   ::
@@ -212,7 +197,6 @@ Model prediction
 To use the trained model weights, generate predictions with your data.
 
 1. Prepare the raw data for training and save as h5 file.
-   An existing h5 file can be downloaded at. **TODO**.
    Note this file is the same file as generated at step 1 from model training (see :ref:`step_1_bs_to_tap`). However, if you want to predict on another data set the data has to be prepared in the same way as it was for training.
 2. Run the python script to generate an h5 file with the predictions saved.
 
@@ -247,7 +231,7 @@ To use the trained model weights, generate predictions with your data.
          f = @save_predictions;
          [EEG] = call_func_for_all_participants(raw_data_path,paths,f,'load_eeg', 0);
 
-Attributable and Non attributable movements analysis (Figure 1)
+Goal and non-goal-directed movements (Figure 1)
 ---------------------------------------------------------------
 This section gives a quick overview on how Figure 1 of the paper is created.
 
@@ -273,38 +257,11 @@ For more details see :doc:`Attributable and Non attributable movements identific
           f = @generate_all_epochs;
           [all_epochs] = call_func_for_all_participants_eeg(path,save_path,f);
 
-2. (Optional) Alternatively the data can be downloaded at: **TODO**.
-   If downloaded, load the files.
-
-   .. code:: matlab
-
-       load('data/bs_to_tap_predictions.mat')
-       load('data/all_epochs.mat')
-
-3. Find the AMs and NAMs
+2. Find the attributable (AMs) and non attributable movements (NAMs) by thresholding the data with optimal F2 score and then identifying peaks. Classify the peaks into AMs and NAMs.
 
    .. code:: matlab
 
        [s_i,s_d,taps] = get_ams_nam(bs_to_tap_predictions);
 
-4. Create the figures
-
-  .. code:: matlab
-
-       % Figure 1 - B
-       plot_bs_shape_tl_ams_nams(bs_to_tap_predictions, 0, 's_i',s_i, 's_d',s_d, 'taps', taps)
-
-       % Figure 1 - C figure_name = 'BS_freq_ams_nams';
-       plot_freq_ams_nams(bs_to_tap_predictions, 0, 's_i', s_i,'s_d',s_d, 'taps', taps,'plot_deltas', 0)
-
-       % Figure 1 - D
-       plot_density_am_nams(all_epochs, 0)
-
-       % Figure 1 - E
-       plot_inter_event_intervals(all_epochs, 0)
-
-       % Supplementary Figure 1
-       plot_pred_tl_ams_nams(bs_to_tap_predictions, 0, 's_i', s_i,'s_d',s_d, 'taps', taps)
-
-EEG analysis (Figure 2)
------------------------
+3. Create the figures
+(code unavailable)
